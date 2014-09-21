@@ -9,5 +9,64 @@
     <string name="image_default_title">Image Result</string>
     <string name="title_activity_image_display">ImageDisplayActivity</string>
     <string name="hello_world">Hello world!</string>
+    <string name="title_activity_settings">SettingsActivity</string>
+    <string name="label_settings_header">Advanced search options</string>
+    <string name="label_image_size">Image Size</string>
+    <string name="label_color_filter">Color Filter</string>
+    <string name="label_image_type">Image Type</string>
+    <string name="label_site_filter">Site Filter</string>
+    <string name="hint_site_filter">Enter site address</string>
+    <string name="label_btn_save">Save</string>
+
+    <!-- Image Size values-->
+    <string-array name="image_size_array_name">
+        <item>any</item>
+        <item>small</item>
+        <item>medium</item>
+        <item>large</item>
+        <item>extra-large</item>
+    </string-array>
+
+    <string-array name="image_size_array_value">
+        <item>any</item>
+        <item>icon</item>
+        <item>medium</item>
+        <item>xxlarge</item>
+        <item>huge</item>
+    </string-array>
+
+    <!-- Image Color values-->
+    <string-array name="image_color_array">
+        <item>any</item>
+        <item>black</item>
+        <item>blue</item>
+        <item>brown</item>
+        <item>gray</item>
+        <item>green</item>
+        <item>orange</item>
+        <item>pink</item>
+        <item>purple</item>
+        <item>red</item>
+        <item>teal</item>
+        <item>white</item>
+        <item>yellow</item>
+    </string-array>
+
+    <!-- Image Type values-->
+    <string-array name="image_type_array_name">
+        <item>any</item>
+        <item>faces</item>
+        <item>photo</item>
+        <item>clip-art</item>
+        <item>line-art</item>
+    </string-array>
+
+    <string-array name="image_type_array_value">
+        <item>any</item>
+        <item>faces</item>
+        <item>photo</item>
+        <item>clipart</item>
+        <item>lineart</item>
+    </string-array>
 
 </resources>

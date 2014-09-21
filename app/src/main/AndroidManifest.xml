@@ -26,6 +26,14 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.codepath.jaiminshah.gridimagesearch.activities.SearchActivity" />
         </activity>
+        <activity
+            android:name="com.codepath.jaiminshah.gridimagesearch.activities.SettingsActivity"
+            android:label="@string/title_activity_settings"
+            android:parentActivityName="com.codepath.jaiminshah.gridimagesearch.activities.SearchActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.codepath.jaiminshah.gridimagesearch.activities.SearchActivity" />
+        </activity>
     </application>
 
 </manifest>
