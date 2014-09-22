@@ -3,6 +3,8 @@ package com.codepath.jaiminshah.gridimagesearch.activities;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -12,6 +14,7 @@ import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.GridView;
+import android.widget.SearchView;
 import android.widget.Toast;
 
 import com.codepath.jaiminshah.gridimagesearch.R;
@@ -55,6 +58,10 @@ public class SearchActivity extends Activity {
         mImgResults = new ArrayList<ImageResult>();
         maImgResults = new ImageResultsAdapter(this, mImgResults);
         mgvResults.setAdapter(maImgResults);
+
+        if (isNetworkAvailable() == false){
+            Toast.makeText(this, "No Connection",Toast.LENGTH_SHORT).show();
+        }
     }
 
     private void setupViews() {
@@ -89,10 +96,19 @@ public class SearchActivity extends Activity {
         mQuery = metQuery.getText().toString();
         InputMethodManager imm = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
         imm.hideSoftInputFromWindow(metQuery.getWindowToken(), 0);
+
+        if (isNetworkAvailable() == false){
+            Toast.makeText(this, "No Connection",Toast.LENGTH_SHORT).show();
+            return;
+        }
         startNewSearch();
     }
 
     private void startNewSearch(){
+        //Dont start a new search for a null Query
+        if (mQuery == null){
+            return;
+        }
         mPageNo = 0;
         //Clear the exisiting images from the array.(in case where its a new search)
         maImgResults.clear();
@@ -144,6 +160,25 @@ public class SearchActivity extends Activity {
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.search, menu);
+        final MenuItem searchItem = menu.findItem(R.id.action_search);
+        final SearchView searchView = (SearchView) searchItem.getActionView();
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                mQuery = query;
+                InputMethodManager imm = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
+                imm.hideSoftInputFromWindow(searchView.getWindowToken(), 0);
+
+                startNewSearch();
+                return true;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                return true;
+            }
+        });
+
         return true;
     }
 
@@ -172,5 +207,12 @@ public class SearchActivity extends Activity {
             mFilters = data.getExtras().getString("filters");
            startNewSearch();
        }
+    }
+
+    private Boolean isNetworkAvailable() {
+        ConnectivityManager connectivityManager
+                = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo activeNetworkInfo = connectivityManager.getActiveNetworkInfo();
+        return activeNetworkInfo != null && activeNetworkInfo.isConnectedOrConnecting();
     }
 }

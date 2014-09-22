@@ -20,7 +20,8 @@
         android:layout_toStartOf="@+id/btnSearch"
         android:layout_alignBottom="@+id/btnSearch"
         android:inputType="textAutoComplete"
-        android:hint="@string/hint_search_text" />
+        android:hint="@string/hint_search_text"
+        android:visibility="gone"/>
 
     <Button
         android:layout_width="wrap_content"
@@ -30,7 +31,8 @@
         android:layout_alignParentTop="true"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true"
-        android:onClick="onImageSearch"/>
+        android:onClick="onImageSearch"
+        android:visibility="gone"/>
 
     <GridView
         android:layout_width="wrap_content"
