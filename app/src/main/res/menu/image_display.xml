@@ -3,8 +3,9 @@
     tools:context="com.codepath.jaiminshah.gridimagesearch.activities.ImageDisplayActivity" >
     <item
         android:id="@+id/menu_item_share"
-        android:showAsAction="ifRoom"
+        android:showAsAction="always"
+        android:visible="false"
         android:title="@string/label_menu_share"
-        android:icon="@drawable/ic_action_share"
-        android:actionProviderClass="android.widget.ShareActionProvider" />
+        android:icon="@drawable/ic_action_share"/>
+        <!--android:actionProviderClass="android.widget.ShareActionProvider" />-->
 </menu>

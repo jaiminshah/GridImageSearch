@@ -10,7 +10,9 @@ import android.os.Bundle;
 import android.os.Environment;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.ShareActionProvider;
 import android.widget.Toast;
 
@@ -23,29 +25,16 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 
 public class ImageDisplayActivity extends Activity {
+    private MenuItem mItemShare;
     private ShareActionProvider miShareAction;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_image_display);
-        String url = getIntent().getStringExtra("url");
-        ImageView ivImageResult = (ImageView) findViewById(R.id.ivImageResult);
-        Picasso.with(this)
-                .load(url)
-                .into(ivImageResult,new Callback() {
-                    @Override
-                    public void onSuccess() {
-                        onImageShare();
-                    }
-
-                    @Override
-                    public void onError() {
-                    }
-                });
     }
 
-    private void onImageShare() {
+    public void onImageShare(MenuItem item) {
         ImageView siv = (ImageView) findViewById(R.id.ivImageResult);
         // Get access to the URI for the bitmap
         Uri bmpUri = getLocalBitmapUri(siv);
@@ -56,7 +45,8 @@ public class ImageDisplayActivity extends Activity {
             shareIntent.putExtra(Intent.EXTRA_STREAM, bmpUri);
             shareIntent.setType("image/*");
             // Launch sharing dialog for image
-            miShareAction.setShareIntent(shareIntent);
+//            miShareAction.setShareIntent(shareIntent);
+            startActivity(Intent.createChooser(shareIntent, "Share image using"));
         } else {
            Toast.makeText(this,"Sorry something went wrong while sharing",Toast.LENGTH_SHORT).show();
         }
@@ -92,11 +82,39 @@ public class ImageDisplayActivity extends Activity {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.image_display, menu);
 
-        MenuItem item = menu.findItem(R.id.menu_item_share);
+        mItemShare = menu.findItem(R.id.menu_item_share);
+        String url = getIntent().getStringExtra("url");
+        ImageView ivImageResult = (ImageView) findViewById(R.id.ivImageResult);
+        final ProgressBar progressBar = (ProgressBar)findViewById(R.id.pbImageDisplay);
+        progressBar.setVisibility(View.VISIBLE);
+        Picasso.with(this)
+                .load(url)
+                .into(ivImageResult, new Callback() {
+                    @Override
+                    public void onSuccess() {
+                        //      onImageShare();
+                        mItemShare.setVisible(true);
+                        progressBar.setVisibility(View.GONE);
+                    }
+
+                    @Override
+                    public void onError() {
+                    }
+                });
         // Fetch reference to the share action provider
-        miShareAction = (ShareActionProvider) item.getActionProvider();
+//        miShareAction = (ShareActionProvider) mItemShare.getActionProvider();
         // Return true to display menu
         return true;
     }
 
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()){
+            case R.id.menu_item_share:
+                onImageShare(item);
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+
+    }
 }

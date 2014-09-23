@@ -3,18 +3,26 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent">
-    <ImageView
+
+    <com.etsy.android.grid.util.DynamicHeightImageView
         android:id="@+id/ivImage"
-        android:layout_width="75dp"
-        android:layout_height="75dp"
-        android:contentDescription="@string/image_content_desc"
-        android:scaleType="fitCenter"
-        android:adjustViewBounds="true"/>
-    <TextView
-        android:id="@+id/tvTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:contentDescription="@string/image_content_desc"
+        android:scaleType="centerCrop"
+        android:adjustViewBounds="true"/>
+
+    <com.etsy.android.grid.util.DynamicHeightTextView
+        android:id="@+id/tvTitle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="1dp"
         android:maxLines="2"
         android:ellipsize="end"
-        android:text="@string/image_default_title"/>
+        android:padding="6dp"
+        android:textSize="10sp"
+        android:text="@string/image_default_title"
+        android:textColor="@color/text_color"
+        android:background="@color/text_bg"
+        />
 </LinearLayout>

@@ -1,4 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <color name="black">#000000</color>
+    <color name="search_bg">#EFEFEB</color>
+    <color name="text_color">#696969</color>
+    <color name="text_bg">#FFFFFF</color>
+    <color name="text_green">#74BB48</color>
+    <color name="actionbar_bg">#F5F5F5</color>
+    <color name="actionbar_text">#5C5C5C</color>
+
 </resources>

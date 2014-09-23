@@ -13,7 +13,6 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.GridView;
 import android.widget.SearchView;
 import android.widget.Toast;
 
@@ -21,6 +20,7 @@ import com.codepath.jaiminshah.gridimagesearch.R;
 import com.codepath.jaiminshah.gridimagesearch.adapters.ImageResultsAdapter;
 import com.codepath.jaiminshah.gridimagesearch.helpers.EndlessScrollListener;
 import com.codepath.jaiminshah.gridimagesearch.model.ImageResult;
+import com.etsy.android.grid.StaggeredGridView;
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.JsonHttpResponseHandler;
 
@@ -38,7 +38,7 @@ public class SearchActivity extends Activity {
 
     private EditText metQuery;
     private Button mbtnSearch;
-    private GridView mgvResults;
+    private StaggeredGridView mgvResults;
     private ArrayList<ImageResult> mImgResults;
     private ImageResultsAdapter maImgResults;
     private final String mGoogleApi = "https://ajax.googleapis.com/ajax/services/search/images?v=1.0&";
@@ -68,7 +68,7 @@ public class SearchActivity extends Activity {
         metQuery = (EditText) findViewById(R.id.etQuery);
         mbtnSearch = (Button) findViewById(R.id.btnSearch);
 
-        mgvResults = (GridView) findViewById(R.id.gvResults);
+        mgvResults = (StaggeredGridView) findViewById(R.id.gvResults);
         mgvResults.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
