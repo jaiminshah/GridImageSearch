@@ -25,4 +25,17 @@
         android:textColor="@color/text_color"
         android:background="@color/text_bg"
         />
+
+    <com.etsy.android.grid.util.DynamicHeightTextView
+        android:id="@+id/tvWebsite"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:maxLines="2"
+        android:ellipsize="end"
+        android:padding="6dp"
+        android:textSize="10sp"
+        android:text="@string/image_default_title"
+        android:textColor="@color/text_green"
+        android:background="@color/text_bg"
+        />
 </LinearLayout>

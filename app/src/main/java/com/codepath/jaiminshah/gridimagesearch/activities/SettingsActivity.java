@@ -32,21 +32,21 @@ public class SettingsActivity extends Activity {
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(
                 this,
                 R.array.image_size_array_name,
-                android.R.layout.simple_spinner_dropdown_item);
+                android.R.layout.simple_spinner_item);
         spnImageSize.setAdapter(adapter);
 
         spnColorFilter = (Spinner)findViewById(R.id.spnColorFilter);
         adapter = ArrayAdapter.createFromResource(
                 this,
                 R.array.image_color_array,
-                android.R.layout.simple_spinner_dropdown_item);
+                android.R.layout.simple_spinner_item);
         spnColorFilter.setAdapter(adapter);
 
         spnImageType = (Spinner)findViewById(R.id.spnImageType);
         adapter = ArrayAdapter.createFromResource(
                 this,
                 R.array.image_type_array_name,
-                android.R.layout.simple_spinner_dropdown_item);
+                android.R.layout.simple_spinner_item);
         spnImageType.setAdapter(adapter);
 
         etSiteFilter = (EditText)findViewById(R.id.etSiteFilter);

@@ -24,9 +24,13 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 
+import uk.co.senab.photoview.PhotoViewAttacher;
+
 public class ImageDisplayActivity extends Activity {
     private MenuItem mItemShare;
     private ShareActionProvider miShareAction;
+    private PhotoViewAttacher mAttacher;
+    private ImageView mivImageResult;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -84,17 +88,24 @@ public class ImageDisplayActivity extends Activity {
 
         mItemShare = menu.findItem(R.id.menu_item_share);
         String url = getIntent().getStringExtra("url");
-        ImageView ivImageResult = (ImageView) findViewById(R.id.ivImageResult);
+        String website = getIntent().getStringExtra("website");
+        getActionBar().setTitle(website);
+        mivImageResult = (ImageView) findViewById(R.id.ivImageResult);
         final ProgressBar progressBar = (ProgressBar)findViewById(R.id.pbImageDisplay);
         progressBar.setVisibility(View.VISIBLE);
         Picasso.with(this)
                 .load(url)
-                .into(ivImageResult, new Callback() {
+                .into(mivImageResult, new Callback() {
                     @Override
                     public void onSuccess() {
                         //      onImageShare();
                         mItemShare.setVisible(true);
                         progressBar.setVisibility(View.GONE);
+                        if (mAttacher != null){
+                            mAttacher.update();
+                        }else {
+                            mAttacher = new PhotoViewAttacher(mivImageResult);
+                        }
                     }
 
                     @Override

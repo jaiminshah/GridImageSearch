@@ -40,6 +40,7 @@ public class ImageResultsAdapter extends ArrayAdapter<ImageResult>{
             convertView = LayoutInflater.from(getContext()).inflate(R.layout.item_image_result,parent,false);
             viewHolder.ivImage = (DynamicHeightImageView) convertView.findViewById(R.id.ivImage);
             viewHolder.tvTitle = (DynamicHeightTextView) convertView.findViewById(R.id.tvTitle);
+            viewHolder.tvWebsite = (DynamicHeightTextView) convertView.findViewById(R.id.tvWebsite);
             convertView.setTag(viewHolder);
         }else {
             viewHolder = (ViewHolder)convertView.getTag();
@@ -55,7 +56,7 @@ public class ImageResultsAdapter extends ArrayAdapter<ImageResult>{
                 .into(viewHolder.ivImage);
 
         viewHolder.tvTitle.setText(Html.fromHtml(imageInfo.title));
-
+        viewHolder.tvWebsite.setText(imageInfo.visibleUrl);
         return convertView;
     }
 
@@ -81,5 +82,7 @@ public class ImageResultsAdapter extends ArrayAdapter<ImageResult>{
     private static class ViewHolder{
         DynamicHeightImageView ivImage;
         DynamicHeightTextView tvTitle;
+        DynamicHeightTextView tvWebsite;
+
     }
 }

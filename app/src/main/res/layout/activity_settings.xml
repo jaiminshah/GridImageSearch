@@ -17,7 +17,7 @@
         android:layout_alignParentTop="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:textSize="24sp"
+        android:textSize="20sp"
         android:textStyle="bold"
         android:layout_marginBottom="@dimen/activity_horizontal_margin"/>
 
@@ -32,7 +32,7 @@
         android:layout_alignParentStart="true"
         android:layout_alignBottom="@+id/spnImageSize"
         android:textSize="20sp"
-        android:gravity="bottom"
+        android:gravity="center"
         android:layout_marginRight="@dimen/activity_vertical_margin"
         android:layout_marginEnd="@dimen/activity_vertical_margin"/>
 
@@ -58,7 +58,7 @@
         android:layout_alignParentStart="true"
         android:layout_alignBottom="@+id/spnColorFilter"
         android:textSize="20sp"
-        android:gravity="bottom"
+        android:gravity="center"
         android:layout_marginRight="@dimen/activity_vertical_margin"
         android:layout_marginEnd="@dimen/activity_vertical_margin"/>
 
@@ -84,7 +84,7 @@
         android:layout_alignParentStart="true"
         android:layout_alignBottom="@+id/spnImageType"
         android:textSize="20sp"
-        android:gravity="bottom"
+        android:gravity="center"
         android:layout_marginRight="@dimen/activity_vertical_margin"
         android:layout_marginEnd="@dimen/activity_vertical_margin"/>
 
@@ -109,7 +109,7 @@
         android:layout_alignTop="@+id/etSiteFilter"
         android:layout_alignBottom="@+id/etSiteFilter"
         android:textSize="20sp"
-        android:gravity="bottom"
+        android:gravity="center"
         android:layout_marginRight="@dimen/activity_vertical_margin"
         android:layout_marginEnd="@dimen/activity_vertical_margin"
         />
@@ -126,15 +126,5 @@
         android:layout_marginTop="@dimen/activity_horizontal_margin"
         android:inputType="text"
         android:hint="@string/hint_site_filter"/>
-
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/label_btn_save"
-        android:id="@+id/btnSave"
-        android:layout_below="@+id/etSiteFilter"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="@dimen/activity_horizontal_margin"
-        android:onClick="onSave"/>
 
 </RelativeLayout>

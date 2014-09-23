@@ -18,7 +18,9 @@
     </style>
 
     <!-- ActionBar title text -->
-    <style name="MyActionBarTitleText">
+    <style name="MyActionBarTitleText"
+        parent="@android:style/TextAppearance.Holo.Widget.ActionBar.Title">
         <item name="android:textColor">@color/actionbar_text</item>
     </style>
+    <!--parent="android:TextAppearance.StatusBar.Title">-->
 </resources>

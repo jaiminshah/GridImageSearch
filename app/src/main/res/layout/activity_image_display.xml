@@ -6,7 +6,7 @@
     tools:context="com.codepath.jaiminshah.gridimagesearch.activities.ImageDisplayActivity">
     <ProgressBar
         android:id="@+id/pbImageDisplay"
-        style="@android:style/Widget.Holo.ProgressBar.Large"
+        style="@android:style/Widget.Holo.Light.ProgressBar.Large"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
