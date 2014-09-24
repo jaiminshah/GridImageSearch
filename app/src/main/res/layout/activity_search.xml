@@ -10,37 +10,10 @@
     android:background="@color/search_bg"
     tools:context=".SearchActivity">
 
-
-    <EditText
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/etQuery"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_toLeftOf="@+id/btnSearch"
-        android:layout_toStartOf="@+id/btnSearch"
-        android:layout_alignBottom="@+id/btnSearch"
-        android:inputType="textAutoComplete"
-        android:hint="@string/hint_search_text"
-        android:visibility="gone"/>
-
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/label_search_btn"
-        android:id="@+id/btnSearch"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true"
-        android:onClick="onImageSearch"
-        android:visibility="gone"/>
-
     <com.etsy.android.grid.StaggeredGridView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:id="@+id/gvResults"
-        android:layout_below="@+id/etQuery"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:layout_alignParentBottom="true"

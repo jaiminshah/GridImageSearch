@@ -13,8 +13,6 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
-import android.widget.Button;
-import android.widget.EditText;
 import android.widget.SearchView;
 import android.widget.Toast;
 
@@ -38,10 +36,8 @@ import java.util.ArrayList;
 public class SearchActivity extends FragmentActivity implements SettingsFragment.SettingsFragmentListener {
     private static final String TAG = SearchActivity.class.getName();
 
-    private EditText metQuery;
-
-    private Button mbtnSearch;
     private StaggeredGridView mgvResults;
+    private SearchView mSearchView;
     private ArrayList<ImageResult> mImgResults;
     private ImageResultsAdapter maImgResults;
     private final String mGoogleApi = "https://ajax.googleapis.com/ajax/services/search/images?v=1.0&";
@@ -61,14 +57,9 @@ public class SearchActivity extends FragmentActivity implements SettingsFragment
         maImgResults = new ImageResultsAdapter(this, mImgResults);
         mgvResults.setAdapter(maImgResults);
 
-        if (isNetworkAvailable() == false) {
-            Toast.makeText(this, "No Connection", Toast.LENGTH_SHORT).show();
-        }
     }
 
     private void setupViews() {
-        metQuery = (EditText) findViewById(R.id.etQuery);
-        mbtnSearch = (Button) findViewById(R.id.btnSearch);
 
         mgvResults = (StaggeredGridView) findViewById(R.id.gvResults);
         mgvResults.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -95,19 +86,11 @@ public class SearchActivity extends FragmentActivity implements SettingsFragment
         });
     }
 
-    public void onImageSearch(View v) {
-        mQuery = metQuery.getText().toString();
-        InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
-        imm.hideSoftInputFromWindow(metQuery.getWindowToken(), 0);
-
-        if (isNetworkAvailable() == false) {
-            Toast.makeText(this, "No Connection", Toast.LENGTH_SHORT).show();
+    private void startNewSearch() {
+        if (!isNetworkAvailable()) {
+            Toast.makeText(this, "Sorry, Could not connect to Internet", Toast.LENGTH_SHORT).show();
             return;
         }
-        startNewSearch();
-    }
-
-    private void startNewSearch() {
         //Dont start a new search for a null Query
         if (mQuery == null) {
             return;
@@ -136,7 +119,7 @@ public class SearchActivity extends FragmentActivity implements SettingsFragment
                         maImgResults.addAll(ImageResult.fromJSONArray(imageResultsJSON));
 
                     } else {
-                        Toast.makeText(getBaseContext(), "Sorry, we did something wrong :(", Toast.LENGTH_SHORT).show();
+//                        Toast.makeText(getBaseContext(), "Sorry, we did something wrong :(", Toast.LENGTH_SHORT).show();
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();
@@ -164,13 +147,13 @@ public class SearchActivity extends FragmentActivity implements SettingsFragment
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.search, menu);
         final MenuItem searchItem = menu.findItem(R.id.action_search);
-        final SearchView searchView = (SearchView) searchItem.getActionView();
-        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+        mSearchView = (SearchView) searchItem.getActionView();
+        mSearchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
                 mQuery = query;
                 InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
-                imm.hideSoftInputFromWindow(searchView.getWindowToken(), 0);
+                imm.hideSoftInputFromWindow(mSearchView.getWindowToken(), 0);
 
                 startNewSearch();
                 return true;
@@ -199,8 +182,6 @@ public class SearchActivity extends FragmentActivity implements SettingsFragment
     }
 
     private void invokeSettings() {
-//        Intent i = new Intent(this, SettingsActivity.class);
-//        startActivityForResult(i, REQUEST_CODE);
         SettingsFragment fragment = SettingsFragment.newInstance();
         fragment.show(getSupportFragmentManager(),"Settings_fragment");
 
@@ -226,5 +207,25 @@ public class SearchActivity extends FragmentActivity implements SettingsFragment
     public void onSaveButtonClick(String filters) {
         mFilters = filters;
         startNewSearch();
+    }
+
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        if (mQuery != null){
+            outState.putString("mQuery",mQuery);
+            outState.putString("mFilters",mFilters);
+        }
+
+        super.onSaveInstanceState(outState);
+    }
+
+    @Override
+    protected void onRestoreInstanceState(Bundle savedInstanceState) {
+        if (savedInstanceState != null){
+            mQuery = savedInstanceState.getString("mQuery");
+            mFilters = savedInstanceState.getString("mFilters");
+            startNewSearch();
+        }
+        super.onRestoreInstanceState(savedInstanceState);
     }
 }

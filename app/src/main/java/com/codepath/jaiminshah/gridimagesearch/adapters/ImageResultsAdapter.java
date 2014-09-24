@@ -48,8 +48,11 @@ public class ImageResultsAdapter extends ArrayAdapter<ImageResult>{
 
         viewHolder.ivImage.setImageResource(0);
 
-        double positionHeight = getPositionRatio(position);
+
+//        double positionHeight = getPositionRatio(position);
+        double positionHeight = getImageHeightRatio(position);
         viewHolder.ivImage.setHeightRatio(positionHeight);
+
 
         Picasso.with(getContext())
                 .load(imageInfo.tbUrl)
@@ -67,11 +70,22 @@ public class ImageResultsAdapter extends ArrayAdapter<ImageResult>{
         // some match based on the known height and width of the image
         // and maybe a helpful way to get the column height!
         if (ratio == 0) {
-            ratio = getRandomHeightRatio();
+//            ratio = getRandomHeightRatio();
+            ratio = getImageHeightRatio(position);
             sPositionHeightRatios.append(position, ratio);
 //            Log.d(TAG, "getPositionRatio:" + position + " ratio:" + ratio);
         }
         return ratio;
+    }
+
+    private double getImageHeightRatio(final int position){
+        ImageResult imageInfo = getItem(position);
+        return (double)imageInfo.tbHeight / (double)imageInfo.tbWidth;
+    }
+
+    private double getImageWidthRatio(final int position){
+        ImageResult imageInfo = getItem(position);
+        return (double)imageInfo.tbWidth / (double)imageInfo.tbHeight;
     }
 
     private double getRandomHeightRatio() {
